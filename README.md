@@ -106,6 +106,12 @@ The final output was a pixel wise probability map of the forests change, with co
   <img src="https://latex.codecogs.com/svg.image?\color{white}\Large \Omega(f)=\gamma T+\frac{1}{2}\lambda\sum_{j}w_j^2" />
 </div>
 
+<div align="center">
+<img src="https://latex.codecogs.com/svg.image?\dpi{150}\color{lightgray}\LARGE\min_{w,b}\sum_{i=1}^{n}L_\delta(y_i,w^Tx_i+b)" alt="Huber Regression Formula">
+</div>
+
+
+
 
 
 (Results and discussion section will be provided later)
