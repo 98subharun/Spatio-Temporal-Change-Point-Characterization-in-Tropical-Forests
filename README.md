@@ -77,6 +77,18 @@ $$
 S_t = \sum_{j=1}^{J} \left(\gamma_{1j}\sin\frac{2\pi j t}{f} + \gamma_{2j}\cos\frac{2\pi j t}{f}\right)
 $$
 
+---
+
+**Explanation:**  
+- \( T_t \): trend component (long-term change)  
+- \( S_t \): seasonal component (periodic vegetation cycles)  
+- \( e_t \): residual (noise / disturbance)
+
+By detecting structural breaks in \( T_t \), we can localize deforestation or degradation events over time.
+
+---
+
+
 
 # Spatial and spectral CNN embeddings
 The CNN was trained on synthetic dataset generated from the BFAST with each sample encoding complex vegetation dynamic derived from the simulated NDVI, NBR, NDMI and EVI signals. This setup provided precise supervision across all the change classes. The advantage of this is that it provides precise supervision. The CNN embeddings learn features which are tied to well characterized disturbance patterns as the synthetic generator defines both the timing and type of change. The CNN was implemented as a series of sequential convolutional and pooling layers, moreover the architecture was made to be lightweight which prevents overfitting. The final layer produced a dense feature vector which was approximately 512 dimensions in this prototype which encoded abstract attributes. These were later concatenated with the temporal descriptors derived from the BFAST and ancillary spatial features. Seasonal cycles, stochastic noise and random disturbances were injected into the simulated dataset itself thus forcing the CNN to generalize across a wide range of unfavorable and favorable conditions.
