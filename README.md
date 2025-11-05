@@ -64,8 +64,6 @@ where $\mathbf{X}$ is the Vandermonde matrix of local points.
 # BFAST
 A classical Breaks for Additive Seasonal and Trend (BFAST) was modified to address challenges specific to tropical forests. A Huber Regression system was adopted to reduce sensitivity to outliers from cloud cover and sensor noise. Savitzky-Golay smoothing was adopted to smooth the residuals while still preserving the breakpoints. Density based outliers were with distinct multipliers for dense, medium, and sparse forests to improve the classification sensitivity. Change points were only confirmed if they were detected across a variety of indices, including NDVI, NBR and NDMI as each index has different ecological parameters, so combining them would lead to lower misclassification and capture a broader range of real changes.
 This design allows the model to capture not just the presence of some form of change but also its persistence, producing descriptors, recovery trajectories and the severity of canopy distribution. This allows the BFAST to act as a temporal backbone on the system.
-
-
 <div align="center">
   <img src="https://latex.codecogs.com/svg.image?\color{white}\Large Y_t=T_t+S_t+e_t" />
 </div>
@@ -77,9 +75,6 @@ This design allows the model to capture not just the presence of some form of ch
 <div align="center">
   <img src="https://latex.codecogs.com/svg.image?\color{white}\Large S_t=\sum_{j=1}^{J}\left(\gamma_{1j}\sin\frac{2\pi jt}{f}+\gamma_{2j}\cos\frac{2\pi jt}{f}\right)" />
 </div>
-
-
-
 # Spatial and spectral CNN embeddings
 The CNN was trained on synthetic dataset generated from the BFAST with each sample encoding complex vegetation dynamic derived from the simulated NDVI, NBR, NDMI and EVI signals. This setup provided precise supervision across all the change classes. The advantage of this is that it provides precise supervision. The CNN embeddings learn features which are tied to well characterized disturbance patterns as the synthetic generator defines both the timing and type of change. The CNN was implemented as a series of sequential convolutional and pooling layers, moreover the architecture was made to be lightweight which prevents overfitting. The final layer produced a dense feature vector which was approximately 512 dimensions in this prototype which encoded abstract attributes. These were later concatenated with the temporal descriptors derived from the BFAST and ancillary spatial features. Seasonal cycles, stochastic noise and random disturbances were injected into the simulated dataset itself thus forcing the CNN to generalize across a wide range of unfavorable and favorable conditions.
 
