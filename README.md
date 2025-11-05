@@ -30,6 +30,8 @@ The regression minimizes:
 </div>
 
 
+
+
 Huber regression is robust to outliers and more stable than L1 regression.
 
 ---
