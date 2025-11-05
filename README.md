@@ -96,11 +96,13 @@ $$
 z = \text{GlobalAvgPool}(h_L)
 $$
 
-- <img src="https://latex.codecogs.com/png.image?\dpi{110}\color{lightgray}X" alt="X"> : input time-series or spectral patch  
-- <img src="https://latex.codecogs.com/png.image?\dpi{110}\color{lightgray}f_\theta" alt="f_theta"> : CNN parameterized by weights θ  
-- <img src="https://latex.codecogs.com/png.image?\dpi{110}\color{lightgray}z" alt="z"> : learned low-dimensional embedding  
+X: input time-series or spectral patch
 
-The CNN transforms raw multi-temporal inputs into abstract features capturing spatio-temporal texture and vegetation patterns.
+f<sub>θ</sub>: CNN parameterized by weights θ
+
+z: learned low-dimensional embedding
+
+The CNN transforms raw spatio-temporal inputs into abstract representations capturing texture, vegetation indices, and structural changes over time.
 
 # XGB
 The feature vectors from the BFAST and CNN were concatenated and later classified by the XGB. The input feature vector consisted of 20+ time-based descriptors taken from the BFAST pipeline which includes seasonal amplitudes, recovery duration, inter index correlation and break persistence. The synthetic dataset was generated using canopy disturbances into a Landsat like time series. The model’s hyper parameters were later tuned to balance generalization and sensitivity. Bias-variance tradeoff was controlled through learning rate tuning and stochastic subsampling so that the model generalized effectively, randomness was introduced to reduce the correlations between the individual trees in the model, addressed imbalances between change and no change A cross-index voting system was enforced to consider a joint index response. For example: - A true response was only considered if the NDVI decline was consistent with NBR loss and NDMI moisture shifts. This reduced false positives by ~25%.
@@ -118,5 +120,12 @@ $$
 \Omega(f) = \gamma T + \frac{1}{2}\lambda\sum_j w_j^2
 $$
 
+h<sub>k</sub>: individual decision tree
+
+η<sub>k</sub>: learning rate or model weight
+
+z: CNN embedding or engineered features
+
+The ensemble combines multiple weak learners (trees) to iteratively minimize prediction error, improving classification robustness and generalization in spatio-temporal change detection.
 
 (Results and discussion section will be provided later)
