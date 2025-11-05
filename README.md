@@ -77,17 +77,12 @@ $$
 S_t = \sum_{j=1}^{J} \left(\gamma_{1j}\sin\frac{2\pi j t}{f} + \gamma_{2j}\cos\frac{2\pi j t}{f}\right)
 $$
 
----
 
-**Explanation:**  
-- \( T_t \): trend component (long-term change)  
-- \( S_t \): seasonal component (periodic vegetation cycles)  
-- \( e_t \): residual (noise / disturbance)
+- T<sub>t</sub>: trend component (long-term change)  
+- S<sub>t</sub>: seasonal component (periodic vegetation cycles)  
+- e<sub>t</sub>: residual (noise / disturbance)
 
-By detecting structural breaks in \( T_t \), we can localize deforestation or degradation events over time.
-
----
-
+By detecting structural breaks in T<sub>t</sub>, we can localize deforestation or degradation events over time.
 
 
 # Spatial and spectral CNN embeddings
