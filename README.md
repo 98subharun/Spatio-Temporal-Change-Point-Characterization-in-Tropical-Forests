@@ -107,11 +107,8 @@ The final output was a pixel wise probability map of the forests change, with co
 </div>
 
 <div align="center">
-<img src="https://latex.codecogs.com/svg.image?\dpi{150}\color{lightgray}\LARGE\min_{w,b}\sum_{i=1}^{n}L_\delta(y_i,w^Tx_i+b)" alt="Huber Regression Formula">
+  <img src="https://latex.codecogs.com/png.image?\dpi{150}\color{lightgray}\LARGE\min_{w,b}\sum_{i=1}^{n}L_\delta(y_i,w^Tx_i+b)" alt="Huber Regression Formula" />
 </div>
-
-
-
 
 
 (Results and discussion section will be provided later)
