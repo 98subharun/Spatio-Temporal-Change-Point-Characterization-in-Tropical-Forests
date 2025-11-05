@@ -25,9 +25,9 @@ Where:
 
 The regression minimizes:
 
-<p align="center">
-  <img src="https://latex.codecogs.com/svg.latex?\color%7Blightgray%7D%20\LARGE%20\min_%7Bw,b%7D%20\sum_%7Bi=1%7D%5En%20L_\delta(y_i,%20w%5ETx_i%20+%20b)" alt="Huber Regression Formula"/>
-</p>
+<div align="center">
+  <img src="https://latex.codecogs.com/png.latex?\dpi{150}\color{white}\LARGE\min_{w,b}\sum_{i=1}^{n}L_\delta(y_i,w^Tx_i+b)" alt="Huber Regression Formula"/>
+</div>
 
 
 Huber regression is robust to outliers and more stable than L1 regression.
