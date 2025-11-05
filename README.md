@@ -96,6 +96,11 @@ $$
 z = \text{GlobalAvgPool}(h_L)
 $$
 
+- <img src="https://latex.codecogs.com/png.image?\dpi{110}\color{lightgray}X" alt="X"> : input time-series or spectral patch  
+- <img src="https://latex.codecogs.com/png.image?\dpi{110}\color{lightgray}f_\theta" alt="f_theta"> : CNN parameterized by weights θ  
+- <img src="https://latex.codecogs.com/png.image?\dpi{110}\color{lightgray}z" alt="z"> : learned low-dimensional embedding  
+
+The CNN transforms raw multi-temporal inputs into abstract features capturing spatio-temporal texture and vegetation patterns.
 
 # XGB
 The feature vectors from the BFAST and CNN were concatenated and later classified by the XGB. The input feature vector consisted of 20+ time-based descriptors taken from the BFAST pipeline which includes seasonal amplitudes, recovery duration, inter index correlation and break persistence. The synthetic dataset was generated using canopy disturbances into a Landsat like time series. The model’s hyper parameters were later tuned to balance generalization and sensitivity. Bias-variance tradeoff was controlled through learning rate tuning and stochastic subsampling so that the model generalized effectively, randomness was introduced to reduce the correlations between the individual trees in the model, addressed imbalances between change and no change A cross-index voting system was enforced to consider a joint index response. For example: - A true response was only considered if the NDVI decline was consistent with NBR loss and NDMI moisture shifts. This reduced false positives by ~25%.
