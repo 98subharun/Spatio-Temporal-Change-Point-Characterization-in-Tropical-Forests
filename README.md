@@ -64,51 +64,47 @@ where $\mathbf{X}$ is the Vandermonde matrix of local points.
 # BFAST
 A classical Breaks for Additive Seasonal and Trend (BFAST) was modified to address challenges specific to tropical forests. A Huber Regression system was adopted to reduce sensitivity to outliers from cloud cover and sensor noise. Savitzky-Golay smoothing was adopted to smooth the residuals while still preserving the breakpoints. Density based outliers were with distinct multipliers for dense, medium, and sparse forests to improve the classification sensitivity. Change points were only confirmed if they were detected across a variety of indices, including NDVI, NBR and NDMI as each index has different ecological parameters, so combining them would lead to lower misclassification and capture a broader range of real changes.
 This design allows the model to capture not just the presence of some form of change but also its persistence, producing descriptors, recovery trajectories and the severity of canopy distribution. This allows the BFAST to act as a temporal backbone on the system.
-<div align="center">
-  <img src="https://latex.codecogs.com/svg.image?\color{white}\Large Y_t=T_t+S_t+e_t" />
-</div>
 
-<div align="center">
-  <img src="https://latex.codecogs.com/svg.image?\color{white}\Large T_t=\alpha_0+\alpha_1t+\sum_{k=1}^{K}\beta_kD_k(t)" />
-</div>
+$$
+Y_t = T_t + S_t + e_t
+$$
 
-<div align="center">
-  <img src="https://latex.codecogs.com/svg.image?\color{white}\Large S_t=\sum_{j=1}^{J}\left(\gamma_{1j}\sin\frac{2\pi jt}{f}+\gamma_{2j}\cos\frac{2\pi jt}{f}\right)" />
-</div>
+$$
+T_t = \alpha_0 + \alpha_1 t + \sum_{k=1}^{K} \beta_k D_k(t)
+$$
+
+$$
+S_t = \sum_{j=1}^{J} \left(\gamma_{1j}\sin\frac{2\pi j t}{f} + \gamma_{2j}\cos\frac{2\pi j t}{f}\right)
+$$
+
+
 # Spatial and spectral CNN embeddings
 The CNN was trained on synthetic dataset generated from the BFAST with each sample encoding complex vegetation dynamic derived from the simulated NDVI, NBR, NDMI and EVI signals. This setup provided precise supervision across all the change classes. The advantage of this is that it provides precise supervision. The CNN embeddings learn features which are tied to well characterized disturbance patterns as the synthetic generator defines both the timing and type of change. The CNN was implemented as a series of sequential convolutional and pooling layers, moreover the architecture was made to be lightweight which prevents overfitting. The final layer produced a dense feature vector which was approximately 512 dimensions in this prototype which encoded abstract attributes. These were later concatenated with the temporal descriptors derived from the BFAST and ancillary spatial features. Seasonal cycles, stochastic noise and random disturbances were injected into the simulated dataset itself thus forcing the CNN to generalize across a wide range of unfavorable and favorable conditions.
 
+$$
+h_l = f(W_l * h_{l-1} + b_l)
+$$
 
-<div align="center">
-  <img src="https://latex.codecogs.com/svg.image?\color{white}\Large h_l=f(W_l*h_{l-1}+b_l)" />
-</div>
-
-<div align="center">
-  <img src="https://latex.codecogs.com/svg.image?\color{white}\Large z=\text{GlobalAvgPool}(h_L)" />
-</div>
-
+$$
+z = \text{GlobalAvgPool}(h_L)
+$$
 
 
 # XGB
 The feature vectors from the BFAST and CNN were concatenated and later classified by the XGB. The input feature vector consisted of 20+ time-based descriptors taken from the BFAST pipeline which includes seasonal amplitudes, recovery duration, inter index correlation and break persistence. The synthetic dataset was generated using canopy disturbances into a Landsat like time series. The model’s hyper parameters were later tuned to balance generalization and sensitivity. Bias-variance tradeoff was controlled through learning rate tuning and stochastic subsampling so that the model generalized effectively, randomness was introduced to reduce the correlations between the individual trees in the model, addressed imbalances between change and no change A cross-index voting system was enforced to consider a joint index response. For example: - A true response was only considered if the NDVI decline was consistent with NBR loss and NDMI moisture shifts. This reduced false positives by ~25%.
 The final output was a pixel wise probability map of the forests change, with confidence intervals derived from variance. By providing pixel wise probability maps with confidence intervals, the system could not only identified disturbance but also quantify uncertainty.
 
+$$
+\hat{y}_i = \sum_{k=1}^{K} f_k(x_i), \quad f_k \in \mathcal{F}
+$$
 
-<div align="center">
-  <img src="https://latex.codecogs.com/svg.image?\color{white}\Large \hat{y}_i=\sum_{k=1}^{K}f_k(x_i),\quad f_k\in\mathcal{F}" />
-</div>
+$$
+\mathcal{L}^{(t)} = \sum_i l\big(y_i,\; \hat{y}_i^{(t-1)} + f_t(x_i)\big) + \Omega(f_t)
+$$
 
-<div align="center">
-  <img src="https://latex.codecogs.com/svg.image?\color{white}\Large \mathcal{L}^{(t)}=\sum_i l(y_i,\hat{y}_i^{(t-1)}+f_t(x_i))+\Omega(f_t)" />
-</div>
-
-<div align="center">
-  <img src="https://latex.codecogs.com/svg.image?\color{white}\Large \Omega(f)=\gamma T+\frac{1}{2}\lambda\sum_{j}w_j^2" />
-</div>
-
-<div align="center">
-  <img src="https://latex.codecogs.com/png.image?\dpi{150}\color{lightgray}\LARGE\min_{w,b}\sum_{i=1}^{n}L_\delta(y_i,w^Tx_i+b)" alt="Huber Regression Formula" />
-</div>
+$$
+\Omega(f) = \gamma T + \frac{1}{2}\lambda\sum_j w_j^2
+$$
 
 
 (Results and discussion section will be provided later)
