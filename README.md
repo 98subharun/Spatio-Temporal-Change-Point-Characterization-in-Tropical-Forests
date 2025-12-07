@@ -1,4 +1,4 @@
-Note:-This ReadMe only provides snippets of my actual latest paper. DOI to paper will be provided when the paper is published OR is on TechArxhive
+Note:- 10.36227/techrxiv.176289400.08815960/v1
 
 # Description
 The Amazons Forest sequesters vast amounts of carbon, making it one of the planet’s largest terrestrial carbon sinks, unfortunately, illegal deforestation and climate-related deterioration threaten this critical ecosystem. Current historical analysis of forests through satellite imagery often results in misclassification due to seasonal variations, cloud cover, and sensor anomalies. This study proposes a Novel hybrid pipeline for break point characterization using a Break for Additive Seasons and Trends (BFAST) time series algorithm combined with a Convolutional Neural Network (CNN) and Extreme Gradient Boosting (XGB) architecture trained on a sophisticated synthetic dataset leveraging Deep Learning techniques. This system gains an accuracy of ~97% in characterizing changes into 5 major categories demonstrating the impact of such a system in forest monitoring.
